@@ -59,3 +59,18 @@ void IOToggle(volatile uint8_t * PORT, uint8_t PIN)
     }
     *PORT ^= pin2hex(PIN);
 }
+
+bool IOGet(volatile uint8_t port, uint8_t pin)
+{
+    if(!isWithinBounds(pin))
+    {
+        return false;
+    }
+
+    bool result = pin2hex(pin) & port;
+    if(result)
+    {
+        return true;
+    }
+    return false;
+}

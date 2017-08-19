@@ -5,9 +5,10 @@
 
 enum {PIN_MIN = 0, PIN_MAX = 7};
 
-void IOInit(volatile uint8_t * REG_DIR, volatile uint8_t * REG_IO);
-void IOSetDir(volatile uint8_t * PORT, uint8_t PIN, bool isOutput);
-void IOSet(volatile uint8_t * PORT, uint8_t PIN);
-void IOClear(volatile uint8_t * PORT, uint8_t PIN);
-void IOToggle(volatile uint8_t * PORT, uint8_t PIN);
+void IOInit(volatile uint8_t * reg_dir, volatile uint8_t * reg_io);
+void IOSetDir(volatile uint8_t * port, uint8_t pin, bool isOutput);
+void IOSet(volatile uint8_t * port, uint8_t pin);
+void IOClear(volatile uint8_t * port, uint8_t pin);
+void IOToggle(volatile uint8_t * port, uint8_t pin);
+bool IOGet(volatile uint8_t port, uint8_t pin);
 #endif // _IOPINS_H
