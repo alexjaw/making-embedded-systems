@@ -17,6 +17,7 @@ static uint8_t pin2hex(uint8_t pin)
 
 void IOInit(volatile uint8_t * DIR, volatile uint8_t * IO)
 {
+    //IOSetDir() is left out since it is better for testing the module
     *DIR = dir_reg;
     *IO = io_reg;
 }

@@ -1,2 +1,2 @@
-extern volatile uint8_t PORTA_DIR;
-extern volatile uint8_t PORTA_OUT;
+extern volatile uint8_t REG_DIR;
+extern volatile uint8_t REG_IO;

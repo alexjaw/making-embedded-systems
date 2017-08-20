@@ -1,8 +1,5 @@
 #include "unity.h"
-#include "iopins.h"
-#include <stdint.h>
-
-volatile uint8_t REG_DIR, REG_IO, PIN; 
+#include "iopins.h" 
 
 void setUp(void)
 {
@@ -20,9 +17,9 @@ static uint8_t pin2hex(uint8_t pin)
 
 void test_iopins_Init(void)
 {
-    PIN = 5;
-    IOSetDir(&REG_DIR, PIN, true);
-    IOSet(&REG_IO, PIN);
+    uint8_t pin = 5;
+    IOSetDir(&REG_DIR, pin, true);
+    IOSet(&REG_IO, pin);
     IOInit(&REG_DIR, &REG_IO);
     TEST_ASSERT_EQUAL_HEX8(0, REG_DIR);
     TEST_ASSERT_EQUAL_HEX8(0, REG_IO);
@@ -30,15 +27,15 @@ void test_iopins_Init(void)
 
 void test_iopins_IOSetDirAsOutput()
 {
-    PIN = PIN_MAX;
-    IOSetDir(&REG_DIR, PIN, true);
-    TEST_ASSERT_EQUAL_HEX8(pin2hex(PIN), REG_DIR);
+    uint8_t pin = PIN_MAX;
+    IOSetDir(&REG_DIR, pin, true);
+    TEST_ASSERT_EQUAL_HEX8(pin2hex(pin), REG_DIR);
 }
 
 void test_iopins_IOSetDirAsInput()
 {
-    PIN = PIN_MIN;
-    IOSetDir(&REG_DIR, PIN, false);
+    uint8_t pin = PIN_MIN;
+    IOSetDir(&REG_DIR, pin, false);
     TEST_ASSERT_EQUAL_HEX8(0, REG_DIR);
 }
 
@@ -59,9 +56,9 @@ void test_iopins_SetPinOutOfBounds(void)
 
 void test_iopins_SetCorrectPin(void)
 {
-    PIN = 5;
-    IOSet(&REG_IO, PIN);
-    TEST_ASSERT_EQUAL_HEX8(pin2hex(PIN), REG_IO);
+    uint8_t pin = 5;
+    IOSet(&REG_IO, pin);
+    TEST_ASSERT_EQUAL_HEX8(pin2hex(pin), REG_IO);
 }
 
 void test_iopins_SetCorrectTwoPins(void)
@@ -77,43 +74,43 @@ void test_iopins_SetCorrectTwoPins(void)
 void test_iopins_ClearCorrectPin(void)
 {
     uint8_t pin2clear = 2;
-    PIN = 4;
-    IOSet(&REG_IO, PIN);
+    uint8_t pin = 4;
+    IOSet(&REG_IO, pin);
     IOSet(&REG_IO, pin2clear);
     IOClear(&REG_IO, pin2clear);
-    TEST_ASSERT_EQUAL_HEX8(pin2hex(PIN), REG_IO);
+    TEST_ASSERT_EQUAL_HEX8(pin2hex(pin), REG_IO);
 }
 
 void test_iopins_TogglePinFromClearState()
 {
-    PIN = 4;
-    IOToggle(&REG_IO, PIN);
-    TEST_ASSERT_EQUAL_HEX8((pin2hex(PIN)), REG_IO);
+    uint8_t pin = 4;
+    IOToggle(&REG_IO, pin);
+    TEST_ASSERT_EQUAL_HEX8((pin2hex(pin)), REG_IO);
 }
 
 void test_iopins_TogglePinFromSetState()
 {
-    PIN = 4;
-    IOSet(&REG_IO, PIN);
-    IOToggle(&REG_IO, PIN);
+    uint8_t pin = 4;
+    IOSet(&REG_IO, pin);
+    IOToggle(&REG_IO, pin);
     TEST_ASSERT_EQUAL_HEX8(0, REG_IO);
 }
 
 void test_iopins_GetInputOn()
 {
-    PIN = 4;
+    uint8_t pin = 4;
     REG_IO = 0x81;
-    REG_IO |= pin2hex(PIN);
-    bool result = IOGet(REG_IO, PIN);
+    REG_IO |= pin2hex(pin);
+    bool result = IOGet(REG_IO, pin);
     TEST_ASSERT_EQUAL(true, result);
 }
 
 void test_iopins_GetInputOff()
 {
-    PIN = 4;
+    uint8_t pin = 4;
     REG_IO = 0x81;
-    REG_IO &= ~pin2hex(PIN);
-    bool result = IOGet(REG_IO, PIN);
+    REG_IO &= ~pin2hex(pin);
+    bool result = IOGet(REG_IO, pin);
     TEST_ASSERT_EQUAL(false, result);
 }
 

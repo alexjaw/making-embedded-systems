@@ -1,5 +1,6 @@
 #ifndef _IO_MAPPING_H
 #define _IO_MAPPING_H
+#include <stdint.h>
 
 #if COMPILING_FOR_XPLAINED_XMEGA32E5
 #include "ioMappingXplainedXMEGA32E5.h"

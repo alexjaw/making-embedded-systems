@@ -1,7 +1,14 @@
 #include "led.h"
+#include "iopins.h"
 
-// Pin 4 on port D as output
-#define LED_SET_DIRECTION  PORTA_DIR
-#define LED_REGISTER       PORTA_OUT
-#define LED_BIT            (1 << 4)
+void LEDInit()
+{
+    IOInit(&LED_SET_DIRECTION, &LED_REGISTER);
+    IOSetDir(&LED_SET_DIRECTION, LED_PIN, ISOUT);
+}
+
+void LEDBlink()
+{
+    IOToggle(&LED_REGISTER, LED_PIN);
+}
 
