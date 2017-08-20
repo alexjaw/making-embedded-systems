@@ -15,11 +15,9 @@ volatile uint8_t REG_IO;
 #endif /* COMPILING_FOR_XPLAINED_XMEGA32E5 */
 
                                            /************* ALL ******************/
-#define PIN                4               //This is used
-#define BIT                (1 << PIN)      //Not used, is included since it is in the book
-#define ISOUT              1               //Defines port pin as output. If input, ISOUT 0
-
-//volatile uint8_t REG_DIR, REG_IO, PIN;
+//#define PIN                4               //This is used
+//#define BIT                (1 << PIN)      //Not used, is included since it is in the book
+//#define ISOUT              1               //Defines port pin as output. If input, ISOUT 0
 
 enum {PIN_MIN = 0, PIN_MAX = 7};
 
