@@ -3,8 +3,8 @@
 #include "ioMapping.h"
 
 #if COMPILING_FOR_XPLAINED_XMEGA32E5       /******** XPLAINED_XMEGA32E5 ********/
-#define LED_SET_DIRECTION  PORTA_DIR       //Reg defining if port is in or out
-#define LED_REGISTER       PORTA_OUT       //Reg holding port data
+#define LED_SET_DIRECTION  PORTD.DIR       //Reg defining if port is in or out
+#define LED_REGISTER       PORTD.OUT       //Reg holding port data
 
 #elif TEST                                 /************ TESTS *****************/  
 volatile uint8_t LED_SET_DIRECTION;
