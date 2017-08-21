@@ -1,9 +1,13 @@
 #include "unity.h"
-#include "iopins.h" 
+#include "iopins.h"
+
+//Sometimes ceedling wont find these variables
+//volatile uint8_t REG_DIR;
+//volatile uint8_t REG_IO;
 
 void setUp(void)
 {
-    IOInit(&REG_DIR, &REG_IO);
+    IOInit(&REG_DIR, &REG_IO); 
 }
 
 void tearDown(void)
@@ -114,14 +118,17 @@ void test_iopins_GetInputOff()
     TEST_ASSERT_EQUAL(false, result);
 }
 
+void test_iopins_IOInterruptEnable(void)
+{
+    uint8_t pin = 4;
+    IOInterruptEnable(&REG_IO, pin);  //Any register will do for test
+    TEST_ASSERT_EQUAL_HEX8(pin2hex(pin), REG_IO);
+    IOInterruptDisable(&REG_IO, pin);
+    TEST_ASSERT_EQUAL_HEX8(0, REG_IO);
+}
+
 void test_iopins_NeedToImplement(void)
 {
     TEST_IGNORE_MESSAGE("Need to implement test of reading a pin set to output");
 }
 
-/*
-void test_iopins_NeedToImplement(void)
-{
-    TEST_IGNORE_MESSAGE("Need to Implement iopins");
-}
-*/

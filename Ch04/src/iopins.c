@@ -58,7 +58,7 @@ void IOToggle(volatile uint8_t * port, uint8_t pin)
     *port ^= pin2hex(pin);
 }
 
-bool IOGet(volatile uint8_t port, uint8_t pin)
+bool IOGet(volatile uint8_t port, uint8_t pin) 
 {
     if(!isWithinBounds(pin))
     {
@@ -71,4 +71,14 @@ bool IOGet(volatile uint8_t port, uint8_t pin)
         return true;
     }
     return false;
+}
+
+void IOInterruptEnable(volatile uint8_t * port, uint8_t pin)
+{
+    IOSet(port, pin);
+}
+
+void IOInterruptDisable(volatile uint8_t * port, uint8_t pin)
+{
+    IOClear(port, pin);
 }
