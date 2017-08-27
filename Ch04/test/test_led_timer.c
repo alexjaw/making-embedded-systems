@@ -36,6 +36,24 @@ void test_led_timer_set_frequency(void)
     led_timer_set_frequency(LOW_FRQ_HZ);
 }
 
+void test_led_timer_start(void)
+{
+    timer_start_Expect();
+    led_timer_start();
+}
+
+void test_led_timer_stop(void)
+{
+    timer_stop_Expect();
+    led_timer_stop();
+}
+
+void test_led_timer_reset(void)
+{
+    timer_reset_Expect();
+    led_timer_reset();
+}
+
 void test_led_timer_NeedToImplement(void)
 {
     TEST_IGNORE_MESSAGE("Need to Implement led_timer");
