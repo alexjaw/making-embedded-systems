@@ -28,21 +28,43 @@
 static uint8_t PRESCALER_1024 = TC_CLKSEL_DIV1024_gc;
 static const PER_1HZ = 0x03d1;
 
+/* PWM: 2Mhz default xmega freq with prescaler set at 1024*/
+static uint8_t PRESCALER_64 = TC_CLKSEL_DIV64_gc;
+static const PER_100HZ = 0x0139;
+
+
+/* Lets put TIMER on CTRLA */
 void timer_init(void)
 {
     TCC4.CTRLA = ( TCC4.CTRLA & ~TC4_CLKSEL_gm ) | PRESCALER_1024;
+}
+
+/* Lets put PWM on CTRLB */
+void timer_pwm_init(void)
+{
+    TCC4.CTRLB = ( TCC4.CTRLB & ~TC4_CLKSEL_gm ) | PRESCALER_64;
 }
 
 void timer_set_frequency_1_hz(void)
 {
     /* The Period (PER) register (32bit) sets the TOP value for the counter, 
 	* i.e. how far it will count
-	* 1MHz clock with prescaler 1024 ticks 1E6/1024 = 977 (976.56...) times per
-	* second (1 tick every 1024ms). For 1 Hz this means that we change state
+	* 1MHz clock with prescaler 1024 ticks 1E6/1024 = 977 Hz (976.56...) (times
+	* per second, 1 tick every 1024ms). For 1 Hz this means that we change state
 	* when PER counter has reached half the value, i.e 488 = 0x01E8.
 	* 2MHz clock with prescaler 1024 ticks 2E6/1024 = 1953 times per second.
 	* PER counter = 977 = 0x03d1.
 	* 32Mhz: PER = 0x3d09
 	*/
 	TCC4.PER = PER_1HZ;
+}
+
+void timer_set_simple_pwm(uint8_t duty)
+{
+    /* Need approx 100 Hz, so eye wont ses flicker.
+    * CPU / (PRESCALER * PER) = f => PER = CPU / (f * PRESCALER)
+    * CPU = 2MHZ, PRESCALER = 64, f = 100Hz => PER = 313 = 0x0139
+    */
+    TCC4.PER = PER_100HZ;
+    TCC4.CCBBUF = (uint8_t) duty * PER_100Hz;
 }
