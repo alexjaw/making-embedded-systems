@@ -18,9 +18,7 @@
 
 #include "unity.h"
 #include "led_timer.h"
-#include "mock_timer.h"
-
-const float LOW_FRQ_HZ = 6.5; 
+#include "mock_timer.h" 
 
 void setUp(void)
 {
@@ -32,8 +30,8 @@ void tearDown(void)
 
 void test_led_timer_set_frequency(void)
 {
-    timer_set_frequency_Expect(LOW_FRQ_HZ);
-    led_timer_set_frequency(LOW_FRQ_HZ);
+    timer_set_frequency_1_hz_Expect();
+    led_timer_set_frequency_1_hz();
 }
 
 void test_led_timer_start(void)
