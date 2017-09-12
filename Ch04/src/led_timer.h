@@ -1,5 +1,6 @@
 #ifndef _LED_TIMER_H
 #define _LED_TIMER_H
+#include <stdint.h>
 
 void led_timer_set_frequency_1_hz(void);
 void led_timer_start(void);

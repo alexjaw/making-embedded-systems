@@ -66,5 +66,5 @@ void timer_set_simple_pwm(uint8_t duty)
     * CPU = 2MHZ, PRESCALER = 64, f = 100Hz => PER = 313 = 0x0139
     */
     TCC4.PER = PER_100HZ;
-    TCC4.CCBBUF = (uint8_t) duty * PER_100Hz;
+    TCC4.CCBBUF = (uint8_t) duty / 100 * PER_100Hz;
 }
